@@ -8,6 +8,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
 
 const connectDB = require('./config/dbConn');
 
@@ -15,6 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 3500;
 
 connectDB();
+app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/states', require('./routes/states'));
