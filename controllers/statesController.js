@@ -10,10 +10,15 @@ const addFunFacts = async (state) =>
 {
     const mongoState = await State.findOne({ stateCode: state.code });
 
-    return {
-        ...state,
-        funfacts: mongoState?.funfacts || []
-    };
+    if (mongoState) 
+    {
+        return {
+            ...state,
+            funfacts: mongoState.funfacts
+        };
+    }
+
+    return state;
 };
 
 const getAllStates = async (req, res) => 
